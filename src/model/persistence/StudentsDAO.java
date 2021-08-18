@@ -177,11 +177,17 @@ public class StudentsDAO {
                                  long phoneNumberCell, long phoneNumber, String academicProgram) {
 
         PreparedStatement ps;
-        String sql = "UPDATE estudiantes SET personalEmail = ?, phoneCell = ?, phoneNumber = ?, program = ?" +
+        String sql = "UPDATE estudiantes SET instEmail = ?, phoneCell = ?, phoneNumber = ?, program = ?" +
                 "WHERE instEmail = ?;" ;
         try {
             connect.openConnectDB();
             ps = connect.getConnection().prepareStatement(sql);
+            ps.setString(1, personalEmail);
+            ps.setLong(2,phoneNumberCell);
+            ps.setLong(3,phoneNumber);
+            ps.setString(4,academicProgram);
+            ps.setString(5, institutionalEmail);
+
             ps.execute();
             connect.closeConnectDB();
             return true;
